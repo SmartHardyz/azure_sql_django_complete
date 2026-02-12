@@ -12,12 +12,6 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
-# Initialize ODBC driver on startup (Azure Linux App Service)
-try:
-    from . import odbc_setup
-except Exception as e:
-    print(f"Warning: ODBC setup failed during import: {e}")
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

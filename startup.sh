@@ -1,4 +1,8 @@
-#!/bin/bash
-# This file is no longer needed - use Procfile instead
-# The Procfile in the root directory handles ODBC installation and server startup
+curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+curl https://packages.microsoft.com/config/debian/11/prod.list > /etc/apt/sources.list.d/mssql-release.list
 
+apt-get update
+ACCEPT_EULA=Y apt-get install -y msodbcsql18 unixodbc-dev
+
+python manage.py migrate
+gunicorn --bind=0.0.0.0 --timeout 600 azure_project.wsgi
